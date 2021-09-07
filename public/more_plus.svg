@@ -1,0 +1,45 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="50"
+  height="50"
+  viewBox="0 0 50 50"
+>
+  <defs>
+    <filter
+      id="Path_1754"
+      x="0"
+      y="0"
+      width="50"
+      height="50"
+      filterUnits="userSpaceOnUse"
+    >
+      <feOffset dx="7" dy="6" input="SourceAlpha" />
+      <feGaussianBlur stdDeviation="3.5" result="blur" />
+      <feFlood flood-opacity="0.161" />
+      <feComposite operator="in" in2="blur" />
+      <feComposite in="SourceGraphic" />
+    </filter>
+  </defs>
+  <g id="Group_54" data-name="Group 54" transform="translate(-261.5 -1539.5)">
+    <g transform="matrix(1, 0, 0, 1, 261.5, 1539.5)" filter="url(#Path_1754)">
+      <path
+        id="Path_1754-2"
+        data-name="Path 1754"
+        d="M27.5,0A27.5,27.5,0,1,1,0,27.5,27.5,27.5,0,0,1,27.5,0Z"
+        transform="translate(3.5 4.5)"
+        fill="#efeaea"
+        opacity="0.55"
+      />
+    </g>
+    <text
+      id="_"
+      data-name="+"
+      transform="translate(305 1582)"
+      fill="#4a1533"
+      font-size="35"
+      font-family="NirmalaUI-Bold, Nirmala UI"
+      font-weight="700"
+    ><tspan x="-24.746" y="0">+</tspan></text>
+  </g>
+</svg>
