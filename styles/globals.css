@@ -28,6 +28,9 @@ h1 {
   padding-bottom: 50px;
 }
 
+button {
+  cursor: pointer;
+}
 .site-card-wrapper {
   display: flex;
   justify-content: center;
@@ -138,6 +141,13 @@ h1 {
   overflow-x: hidden;
   overflow-y: auto;
   min-width: 20rem;
+}
+
+.cart-heading {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 /*hero*/
 
@@ -436,4 +446,70 @@ h1 {
 
 .ant-row {
   row-gap: 20px;
+}
+
+/*mycart*/
+
+.mycart {
+  padding: 4rem;
+}
+
+.shop-btn {
+  padding: 0.5rem 1.5rem;
+  border: 0px;
+
+  border-radius: 8px;
+}
+
+.shop-btn:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+/*Schedule Delivery*/
+
+.sched-delivery {
+  display: flex;
+  flex-direction: row;
+  border-radius: 20px;
+  background-color: #f0f7ff;
+  padding: 2rem 3rem 4rem 2rem;
+}
+
+.sched-delivery-left {
+  width: 60%;
+}
+
+.sched-delivery-right {
+  display: flex;
+  justify-content: center;
+
+  width: 40%;
+  align-items: flex-end;
+}
+
+.sched-delivery-right button {
+  cursor: pointer;
+  border-radius: 10px;
+  background-color: #fa26a0;
+  padding: 0.5rem 6rem;
+  border: 0px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  color: white;
+}
+
+.time ul li {
+  display: inline-block;
+  list-style: none;
+  margin: 8px;
+}
+
+.time button {
+  border: 0px;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: #caf3f2;
+}
+.time button:hover {
+  background-color: #05dfd7;
+  cursor: pointer;
 }

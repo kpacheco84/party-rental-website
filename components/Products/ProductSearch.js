@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import SearchBar from './SearchBar'
 import { Row, Col, Card } from 'antd'
 import { GrAddCircle, GrSubtractCircle } from 'react-icons/gr'
+
+import { useItems, useItemsUpdate } from '../Cart'
 
 const { Meta } = Card
 
@@ -19,6 +21,7 @@ const data = [
     incart: 0,
     qty: 2,
     increment: 1,
+    price: 25,
   },
   {
     id: 2,
@@ -32,7 +35,9 @@ const data = [
     longdesc: `This bounce house is sure to please. Fits at least 6 kids comfortably at a time.`,
     incart: 0,
     qty: 5,
+
     increment: 1,
+    price: 50,
   },
   {
     id: 3,
@@ -47,6 +52,7 @@ const data = [
     incart: 0,
     qty: 5,
     increment: 1,
+    price: 100,
   },
   {
     id: 4,
@@ -61,6 +67,7 @@ const data = [
     incart: 0,
     qty: 4,
     increment: 1,
+    price: 35,
   },
   {
     id: 5,
@@ -75,6 +82,7 @@ const data = [
     incart: 0,
     qty: 20,
     increment: 1,
+    price: 25,
   },
   {
     id: 6,
@@ -89,36 +97,52 @@ const data = [
     incart: 0,
     qty: 2,
     increment: 1,
+    price: 60,
   },
 ]
 
 const ProductSearch = (props) => {
   const [loading, setLoading] = useState(true)
   const [newData, setNewData] = useState(data)
+  //const dispatch = useDispatchCart()
+  const items = useItems()
+  const updateItems = useItemsUpdate()
 
+  const updateQty = (id, action) => {
+    console.log('im in your updateQty')
+    updateItems(id, action)
+  }
+  /*
   const updateProductQty = (id, action) => {
-    console.log(id, action)
-
     let product = newData.filter((data) => data.id === id)
 
-    if (action === 'subtract' && product[0].incart !== 0) {
+    if (action === 'remove' && product[0].incart !== 0) {
       let updatedAmt = product[0].incart - 1
       console.log(product, updatedAmt)
 
       let newDataQty = newData.map((element) =>
         element.id === id ? { ...element, incart: updatedAmt } : element,
       )
+
+      //dispatch({ product, type: 'remove' })
       setNewData(newDataQty)
     } else {
       let updatedAmt = product[0].incart + 1
-      console.log(product, updatedAmt)
 
       let newDataQty = newData.map((element) =>
         element.id === id ? { ...element, incart: updatedAmt } : element,
       )
+      console.log(product, newDataQty)
+      //dispatch({ product, type: 'add' })
+      //setName('Bob')
+
+      
+      updateItems()
+
       setNewData(newDataQty)
     }
   }
+  */
 
   return (
     <div className="productsearch">
@@ -148,15 +172,18 @@ const ProductSearch = (props) => {
                   </div>
                   <div className="add-to-cart">
                     <button
-                      onClick={() => updateProductQty(data.id, 'subtract')}
-                      disabled={data.incart === 0 ? true : false}
+                      onClick={() => updateQty(data.id, 'remove')}
+                      //disabled={data.incart === 0 ? true : false}
                     >
                       -
                     </button>
                     {data.incart}
+                    {/* {items.filter((item) => item.id === data.id)
+                      ? items.filter((item) => item.id === data.id).incart
+                   : 0}*/}
                     <button
-                      onClick={() => updateProductQty(data.id, 'add')}
-                      disabled={data.incart === data.qty ? true : false}
+                      onClick={() => updateQty(data.id, 'add')}
+                      //disabled={data.incart === data.qty ? true : false}
                     >
                       +
                     </button>

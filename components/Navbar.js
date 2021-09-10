@@ -1,10 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Menu, Badge, Popover } from 'antd'
+import Link from 'next/link'
+import { useItems, useItemsUpdate } from './Cart'
+
+//import { useCart } from './Cart'
 
 const { SubMenu } = Menu
 
 const Navbar = (props) => {
   const [current, setCurrent] = useState('')
+  //const items = useCart()
+  const items = useItems()
+  const updateItems = useItemsUpdate()
 
   const links = [
     { name: 'Home', path: '/home' },
@@ -51,18 +58,25 @@ const Navbar = (props) => {
       </div>
       <div className="cart-section">
         <Popover placement="bottomRight" content={content}>
-          <Badge
-            className="cart-badge"
-            style={{
-              marginTop: '.9rem',
-              marginRight: '1rem',
-              backgroundColor: '#05dfd7',
-              color: 'black',
-            }}
-            count={5}
-          >
-            <img className="cart" src="/cart.svg" />
-          </Badge>
+          <Link href="/cart">
+            <Badge
+              className="cart-badge"
+              style={{
+                marginTop: '.9rem',
+                marginRight: '1rem',
+                backgroundColor: '#05dfd7',
+                color: 'black',
+              }}
+              count={5}
+            >
+              <img
+                className="cart"
+                src="/cart.svg"
+                onClick={() => console.log('cart being clicked')}
+              />
+              <label>Cart({items === undefined ? 0 : items.length})</label>
+            </Badge>
+          </Link>
         </Popover>
       </div>
     </div>
