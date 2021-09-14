@@ -22,14 +22,15 @@ const MyCart = (props) => {
     },
     {
       title: 'Qty',
-      dataIndex: 'qty',
-      key: 'qty',
+      dataIndex: 'incart',
+      key: 'incart',
     },
     {
       title: 'Price',
       dataIndex: 'price',
       key: 'price',
     },
+    /*,
     {
       title: 'Tags',
       key: 'tags',
@@ -59,7 +60,8 @@ const MyCart = (props) => {
           <a>Delete</a>
         </Space>
       ),
-    },
+    },*/
+    ,
   ]
 
   /*
@@ -91,10 +93,10 @@ const MyCart = (props) => {
   console.log('this is items in MyCart', items)
   return (
     <div>
-      {items ? (
+      {!items ? (
         <h2>Your Cart is empty</h2>
       ) : (
-        <Table columns={columns} dataSource={items} />
+        <Table pagination={false} columns={columns} dataSource={items} />
       )}
     </div>
   )

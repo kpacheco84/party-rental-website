@@ -67,14 +67,13 @@ const Navbar = (props) => {
                 backgroundColor: '#05dfd7',
                 color: 'black',
               }}
-              count={5}
+              count={items === undefined ? 0 : items.length}
             >
               <img
                 className="cart"
                 src="/cart.svg"
                 onClick={() => console.log('cart being clicked')}
               />
-              <label>Cart({items === undefined ? 0 : items.length})</label>
             </Badge>
           </Link>
         </Popover>

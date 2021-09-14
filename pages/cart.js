@@ -33,20 +33,14 @@ const Cart = (props) => {
             </button>
           </div>
         </div>
-        <label>These is the count of items {items.length}</label>
-        {/*<label>These is the Total Price {totalPrice}</label>*/}
-        <div>
-          <ul>
-            {items.map((items) => (
-              <li>{items.name}</li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <MyCart />
-        </div>
-        <div>
-          <ScheduleDelivery />
+        <div className="mycart-content">
+          <div className="mycart-content-left">
+            <label>These is the count of items {items.length}</label>
+            <MyCart />
+          </div>
+          <div className="mycart-content-right">
+            <ScheduleDelivery />
+          </div>
         </div>
       </div>
     </div>

@@ -106,7 +106,7 @@ const ProductSearch = (props) => {
   const [newData, setNewData] = useState(data)
   //const dispatch = useDispatchCart()
   const items = useItems()
-  const updateItems = useItemsUpdate()
+  const { updateItems } = useItemsUpdate()
 
   const updateQty = (id, action) => {
     console.log('im in your updateQty')
@@ -147,13 +147,13 @@ const ProductSearch = (props) => {
   return (
     <div className="productsearch">
       <SearchBar />
+
       <div className="products">
         <div>
           <Row gutter={80} style={{ rowGap: '40px' }}>
             {newData.map((data) => (
-              <Col>
+              <Col key={data.id}>
                 <Card
-                  key={data.id}
                   id={data.id}
                   className="product-cards"
                   style={{ width: 325 }}
@@ -177,10 +177,10 @@ const ProductSearch = (props) => {
                     >
                       -
                     </button>
-                    {data.incart}
-                    {/* {items.filter((item) => item.id === data.id)
-                      ? items.filter((item) => item.id === data.id).incart
-                   : 0}*/}
+                    {items.find((item) => item.id === data.id)
+                      ? items.find((item) => item.id === data.id).incart
+                      : 0}
+
                     <button
                       onClick={() => updateQty(data.id, 'add')}
                       //disabled={data.incart === data.qty ? true : false}

@@ -4,10 +4,11 @@ import React, {
   createContext,
   useState,
   useEffect,
+  useCallback,
 } from 'react'
 
-const ThemeContext = React.createContext()
-const ThemeUpdateContext = React.createContext()
+export const ThemeContext = React.createContext()
+export const ThemeUpdateContext = React.createContext()
 
 const products = [
   {
@@ -115,7 +116,7 @@ export function ThemeProvider({ children }) {
   const [items, setItems] = useState([])
   //const [cartQty, setCartQty] = useState(0)
   useEffect(() => {
-    items
+    return items
   }, [items])
 
   const updateItems = (id, action) => {
@@ -143,46 +144,44 @@ export function ThemeProvider({ children }) {
 
       let foundProduct = items.find((item) => item.id === id)
 
-      console.log('found product', foundProduct)
       if (!foundProduct) {
-        let origItems = items
+        // let origItems = items
 
-        origItems.push(product[0])
-        setItems(origItems)
+        // origItems.push(product[0])
+        product[0].incart = 1
+        console.log('this is the product', product[0])
+        setItems((prev) => {
+          return [product[0], ...prev]
+        })
 
         console.log(
           'product not found push in array this is origitem with the push of product',
-          origItems,
+          items,
         )
       } else {
         console.log('products is found')
-      }
+        foundProduct.incart = foundProduct.incart + 1
 
-      /*else {
-        let updatedAmt = product[0].incart + 1
-        const updateProduct = items.map((element) =>
-          element.id === id ? { ...element, incart: updatedAmt } : element,
+        let orig = items
+        let filtered = orig.filter((orig) => orig.id !== foundProduct.id)
+        // filtered = filtered.push(foundProduct)
+
+        filtered = [foundProduct, ...filtered]
+        console.log(
+          'this is filtered',
+          filtered,
+          'this is found product',
+          foundProduct,
         )
-
-        console.log('lets update the product', updateProduct)
-      }*/
-      /*let productExists = items.find((element) => element.id === id)
-      console.log('this is the product exitst length', productExists, items)
-      if (!productExists) {
-        console.log(' product does not exist', productExists)
-        product[0].incart = product[0].incart + 1
-
-        items.push(product)
-      }*/
+        setItems(filtered)
+      }
     }
   }
 
   return (
-    <ThemeContext.Provider value={items}>
-      <ThemeUpdateContext.Provider value={updateItems}>
-        {children}
-      </ThemeUpdateContext.Provider>
-    </ThemeContext.Provider>
+    <ThemeUpdateContext.Provider value={{ updateItems, setItems }}>
+      <ThemeContext.Provider value={items}>{children}</ThemeContext.Provider>
+    </ThemeUpdateContext.Provider>
   )
 }
 /*
