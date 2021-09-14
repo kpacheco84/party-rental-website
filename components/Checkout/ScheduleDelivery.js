@@ -1,7 +1,18 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { Form } from 'antd'
+import Link from 'next/link'
+
+import Checkout from './Checkout'
 
 const data = ['9:00 AM', '10:00 AM', '11:00 AM', '12:00 AM']
 const ScheduleDelivery = (props) => {
+  const [dropoffTime, setDropoffTime] = useState(null)
+  const [pickupTime, setPickupTime] = useState(null)
+
+  const dropoff = []
+
+  const pickup = []
+
   return (
     <div className="sched-delivery">
       <div className="sched-delivery-left">
@@ -10,8 +21,8 @@ const ScheduleDelivery = (props) => {
         <h2>Schedule Delivery</h2>{' '}
         <p>
           * We will do our best to deliver at the exact time specified but hours
-          my vary within a that 2 hour window. We will contact you when we are
-          on the way.
+          my vary within that 2 hour window. We will contact you when we are on
+          the way.
         </p>
         <h3>Choose a Drop Off Time:</h3>
         <div className="time">
@@ -35,7 +46,7 @@ const ScheduleDelivery = (props) => {
         </div>
       </div>
       <div className="sched-delivery-right">
-        <button>Checkout</button>
+        <Checkout />
       </div>
     </div>
   )
