@@ -21,7 +21,7 @@ const data = [
     incart: 0,
     qty: 2,
     increment: 1,
-    price: 25,
+    price: 125,
   },
   {
     id: 2,
@@ -37,7 +37,7 @@ const data = [
     qty: 5,
 
     increment: 1,
-    price: 50,
+    price: 55,
   },
   {
     id: 3,
@@ -53,51 +53,6 @@ const data = [
     qty: 5,
     increment: 1,
     price: 100,
-  },
-  {
-    id: 4,
-    name: 'Bounce House D',
-    category: 'Bounce House',
-    img: 'test',
-    height: 12,
-    width: 10,
-    length: 24,
-    shortdesc: 'Fantastic bounce house just the perfect size',
-    longdesc: `This bounce house is sure to please. Fits at least 6 kids comfortably at a time.`,
-    incart: 0,
-    qty: 4,
-    increment: 1,
-    price: 35,
-  },
-  {
-    id: 5,
-    name: 'Bounce House E',
-    category: 'Bounce House',
-    img: 'test',
-    height: 12,
-    width: 10,
-    length: 24,
-    shortdesc: 'Fantastic bounce house just the perfect size',
-    longdesc: `This bounce house is sure to please. Fits at least 6 kids comfortably at a time.`,
-    incart: 0,
-    qty: 20,
-    increment: 1,
-    price: 25,
-  },
-  {
-    id: 6,
-    name: 'Bounce House F',
-    category: 'Bounce House',
-    img: 'test',
-    height: 12,
-    width: 10,
-    length: 24,
-    shortdesc: 'Fantastic bounce house just the perfect size',
-    longdesc: `This bounce house is sure to please. Fits at least 6 kids comfortably at a time.`,
-    incart: 0,
-    qty: 2,
-    increment: 1,
-    price: 60,
   },
 ]
 
@@ -167,8 +122,14 @@ const ProductSearch = (props) => {
                 >
                   <Meta title={data.name} description={data.shortdesc} />
                   <div className="products-info">
-                    <b>Demensions:</b> {data.height} X {data.width} X{' '}
-                    {data.length}
+                    <p>
+                      {' '}
+                      <b>Demensions:</b> {data.height} X {data.width} X{' '}
+                      {data.length}
+                    </p>
+                    <p>
+                      Price: <b>${data.price}</b>
+                    </p>
                   </div>
                   <div className="add-to-cart">
                     <button

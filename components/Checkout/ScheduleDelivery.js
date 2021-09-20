@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Form } from 'antd'
+import { Form, Modal } from 'antd'
 import Link from 'next/link'
 
 import Checkout from './Checkout'
@@ -8,6 +8,7 @@ const data = ['9:00 AM', '10:00 AM', '11:00 AM', '12:00 AM']
 const ScheduleDelivery = (props) => {
   const [dropoffTime, setDropoffTime] = useState(null)
   const [pickupTime, setPickupTime] = useState(null)
+  const [showCheckoutForm, setShowCheckoutForm] = useState(false)
 
   const dropoff = []
 
@@ -46,8 +47,9 @@ const ScheduleDelivery = (props) => {
         </div>
       </div>
       <div className="sched-delivery-right">
-        <Checkout />
+        <button role="link">Checkout</button>
       </div>
+      <Checkout />
     </div>
   )
 }
