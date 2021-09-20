@@ -7,6 +7,7 @@ import {
   useElements,
 } from '@stripe/react-stripe-js'
 import axios from 'axios'
+import { Modal } from 'antd'
 
 const CheckoutForm = ({ success }) => {
   const stripe = useStripe()
@@ -39,7 +40,10 @@ const CheckoutForm = ({ success }) => {
       style={{ maxWidth: '400px', margin: '0 auto' }}
     >
       <h2>Price: $10.99 USD</h2>
-
+      <img
+        src="https://images.ricardocuisine.com/services/recipes/500x675_7700.jpg"
+        style={{ maxWidth: '50px' }}
+      />
       <CardElement />
       <button type="submit" disabled={!stripe}>
         Pay
@@ -52,7 +56,7 @@ const CheckoutForm = ({ success }) => {
 // but it is a public key anyway, so not as sensitive
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 
-const Checkout = () => {
+const StripeCheckout = (props) => {
   const [status, setStatus] = React.useState('ready')
 
   if (status === 'success') {
@@ -60,14 +64,16 @@ const Checkout = () => {
   }
 
   return (
-    <Elements stripe={stripePromise}>
-      <CheckoutForm
-        success={() => {
-          setStatus('success')
-        }}
-      />
-    </Elements>
+    <Modal visible={props.showCheckoutForm}>
+      <Elements stripe={stripePromise}>
+        <CheckoutForm
+          success={() => {
+            setStatus('success')
+          }}
+        />
+      </Elements>
+    </Modal>
   )
 }
 
-export default Checkout
+export default StripeCheckout

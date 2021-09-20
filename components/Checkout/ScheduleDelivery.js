@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { Form, Modal } from 'antd'
 import Link from 'next/link'
 
-import Checkout from './Checkout'
+import Checkout from './StripeCheckout'
+import StripeCheckout from './StripeCheckout'
 
 const data = ['9:00 AM', '10:00 AM', '11:00 AM', '12:00 AM']
 const ScheduleDelivery = (props) => {
@@ -13,6 +14,10 @@ const ScheduleDelivery = (props) => {
   const dropoff = []
 
   const pickup = []
+
+  const handleCheckout = () => {
+    setShowCheckoutForm(true)
+  }
 
   return (
     <div className="sched-delivery">
@@ -47,9 +52,14 @@ const ScheduleDelivery = (props) => {
         </div>
       </div>
       <div className="sched-delivery-right">
-        <button role="link">Checkout</button>
+        <button onClick={() => handleCheckout()} role="link">
+          Checkout
+        </button>
       </div>
-      <Checkout />
+      <StripeCheckout
+        showCheckoutForm={showCheckoutForm}
+        setShowCheckoutForm={setShowCheckoutForm}
+      />
     </div>
   )
 }
