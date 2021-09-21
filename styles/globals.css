@@ -528,3 +528,32 @@ button {
   background-color: #05dfd7;
   cursor: pointer;
 }
+
+/*Checkout*/
+
+.checkout-form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 500px;
+  border-radius: 40px;
+}
+
+.checkout-form img {
+  min-height: 6rem;
+  min-width: 100%;
+  margin-bottom: 5rem;
+}
+
+.checkout-form button {
+  display: flex;
+  justify-content: center;
+  background-color: #fa26a0;
+  color: white;
+  font-weight: bold;
+  border: 0px;
+  padding: 1rem 3rem;
+  border-radius: 10px;
+  margin-top: 8rem;
+  margin-bottom: 3rem;
+}
