@@ -1,0 +1,5 @@
+{
+  "AppSyncApiName": "partyrentalwebsite",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false
+}

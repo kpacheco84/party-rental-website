@@ -1,0 +1,83 @@
+type EventTyp @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+  Orders: [Orders] @connection(keyName: "byEventTyp", fields: ["id"])
+}
+
+type Company @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  nam: String
+  Customers: Customers @connection
+}
+
+type UserType @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+}
+
+type Schedule @model @auth(rules: [{allow: public}]) {
+  id: ID!
+}
+
+type OrderDetail @model @auth(rules: [{allow: public}]) @key(name: "byOrders", fields: ["ordersID"]) @key(name: "byProducts", fields: ["productsID"]) {
+  id: ID!
+  ordersID: ID
+  productsID: ID
+  qty: Int
+  amount: Float
+}
+
+type Orders @model @auth(rules: [{allow: public}]) @key(name: "byCustomers", fields: ["customersID"]) @key(name: "byEventTyp", fields: ["eventtypID"]) {
+  id: ID!
+  orderDate: AWSDate
+  fromDate: String
+  thruDate: String
+  eventName: String
+  address_line1: String
+  address_line2: String
+  city: String
+  state: String
+  zip: Int
+  secondaryContact: String
+  customerNotes: String
+  customersID: ID
+  eventtypID: ID
+  OrderDetails: [OrderDetail] @connection(keyName: "byOrders", fields: ["id"])
+}
+
+type Products @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+  shortDesc: String
+  longDesc: String
+  length: Int
+  width: Int
+  height: Int
+  size: String
+  qty: Float
+  active: Boolean
+  imagestorageID: String
+  OrderDetails: [OrderDetail] @connection(keyName: "byProducts", fields: ["id"])
+  amount: Float
+  incart: Int
+}
+
+type Customers @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  firstname: String
+  lastname: String
+  phone: AWSPhone
+  preferredEmail: AWSEmail
+  Orders: [Orders] @connection(keyName: "byCustomers", fields: ["id"])
+  userID: String
+}
+
+type Users @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  firstname: String
+  lastname: String
+  username: String
+  cognitoID: String
+  Customers: Customers @connection
+}
+ 

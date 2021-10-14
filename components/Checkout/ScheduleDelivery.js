@@ -19,6 +19,10 @@ const ScheduleDelivery = (props) => {
     setShowCheckoutForm(true)
   }
 
+  const handleModalClose = () => {
+    setShowCheckoutForm(false)
+  }
+
   return (
     <div className="sched-delivery">
       <div className="sched-delivery-left">
@@ -59,6 +63,7 @@ const ScheduleDelivery = (props) => {
       <StripeCheckout
         showCheckoutForm={showCheckoutForm}
         setShowCheckoutForm={setShowCheckoutForm}
+        handleModalClose={handleModalClose}
       />
     </div>
   )

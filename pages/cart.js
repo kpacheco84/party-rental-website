@@ -36,6 +36,11 @@ const Cart = (props) => {
         <div className="mycart-content">
           <div className="mycart-content-left">
             <label>These is the count of items {items.length}</label>
+            <label>
+              {' '}
+              This is the total amount{' '}
+              {items.map((n) => n.amount * n.qty).reduce((a, b) => a + b, 0)}
+            </label>
             <MyCart />
           </div>
           <div className="mycart-content-right">

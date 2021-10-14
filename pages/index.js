@@ -28,7 +28,7 @@ const Home = () => {
 
       <BookNow />
 
-      <Popular />
+      {/* <Popular />*/}
       <About />
       <GalleryImages />
       <Footer />

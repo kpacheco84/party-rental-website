@@ -7,9 +7,18 @@ import React, {
   useCallback,
 } from 'react'
 
+import Amplify from 'aws-amplify'
+import { DataStore } from '@aws-amplify/datastore'
+import { Products as apiProducts } from '../src/models'
+
+import awsmobile from '../src/aws-exports'
+
+Amplify.configure(awsmobile)
+
 export const ThemeContext = React.createContext()
 export const ThemeUpdateContext = React.createContext()
 
+/*
 const products = [
   {
     id: 1,
@@ -103,6 +112,16 @@ const products = [
     price: 60,
   },
 ]
+*/
+var products = null
+
+const getData = async () => {
+  const data = await DataStore.query(apiProducts)
+  console.log('this is the products data in product search', data)
+  products = [...data]
+}
+
+getData()
 
 export function useItems() {
   return useContext(ThemeContext)
@@ -120,10 +139,13 @@ export function ThemeProvider({ children }) {
   }, [items])
 
   const updateItems = (id, action) => {
-    let product = products.filter((data) => data.id === id)
-    console.log('in update items,', product, product[0].incart)
+    let productUpdated = products.filter((data) => data.id === id)
+    let product = { ...productUpdated[0] }
 
-    console.log('this is the items state in ccart', items)
+    console.log('this is the product', product)
+    //console.log('in update items,', product, product[0].incart)
+
+    //console.log('this is the items state in ccart', items)
     /*
     if (action === 'remove' && product[0].incart !== 0) {
       let updatedAmt = product[0].incart - 1
@@ -148,10 +170,10 @@ export function ThemeProvider({ children }) {
         // let origItems = items
 
         // origItems.push(product[0])
-        product[0].incart = 1
-        console.log('this is the product', product[0])
+        product.incart = +1
+        console.log('this is the product', product)
         setItems((prev) => {
-          return [product[0], ...prev]
+          return [product, ...prev]
         })
 
         console.log(

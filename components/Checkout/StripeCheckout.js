@@ -13,7 +13,10 @@ import { Modal, Form, Input, Button, Radio } from 'antd'
 
 import logo from '../../public/logo.svg'
 
+import { useItems, useItemsUpdate } from '../Cart'
+
 const CheckoutForm = ({ success }) => {
+  const items = useItems()
   const stripe = useStripe()
   const elements = useElements()
   const router = useRouter()
@@ -28,9 +31,15 @@ const CheckoutForm = ({ success }) => {
 
     if (!error) {
       const { id } = paymentMethod
+      let amount =
+        items.map((n) => n.amount * n.qty).reduce((a, b) => a + b, 0) * 100
 
       try {
-        const { data } = await axios.post('/api/charge', { id, amount: 1099 })
+        const { data } = await axios.post('/api/charge', {
+          id,
+          amount: amount,
+          items,
+        })
         console.log(data)
         success()
         router.push('/checkoutsuccess')
@@ -63,7 +72,7 @@ const CheckoutForm = ({ success }) => {
       </Form.Item>
       <CardElement />
       <button type="submit" disabled={!stripe}>
-        Pay $103.99
+        ${items.map((n) => n.amount * n.qty).reduce((a, b) => a + b, 0)}
       </button>
     </Form>
   )
@@ -81,7 +90,12 @@ const StripeCheckout = (props) => {
   }
 
   return (
-    <Modal visible={props.showCheckoutForm} footer={null}>
+    <Modal
+      visible={props.showCheckoutForm}
+      footer={null}
+      onCancel={props.handleModalClose}
+      closable
+    >
       <Elements stripe={stripePromise}>
         <CheckoutForm
           success={() => {

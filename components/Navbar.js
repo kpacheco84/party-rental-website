@@ -2,12 +2,16 @@ import React, { useState, useEffect, useContext } from 'react'
 import { Menu, Badge, Popover } from 'antd'
 import Link from 'next/link'
 import { useItems, useItemsUpdate } from './Cart'
+import { BsPersonFill } from 'react-icons/bs'
 
 //import { useCart } from './Cart'
 
 const { SubMenu } = Menu
 
 const Navbar = (props) => {
+  const authenticated = 'false'
+  const authGroup = 'Customer'
+
   const [current, setCurrent] = useState('')
   //const items = useCart()
   const items = useItems()
@@ -20,6 +24,15 @@ const Navbar = (props) => {
     { name: 'Gallery', path: '/gallery' },
     { name: 'FAQ', path: '/faq' },
     { name: 'Contact Us', path: '/contactus' },
+  ]
+
+  const authlinks = [
+    { name: 'Dashboard', path: '/dashboard' },
+    { name: 'Products', path: '/products' },
+    { name: 'Orders', path: '/orders' },
+    { name: 'Schedule', path: '/schedule' },
+    { name: 'Notifications', path: '/notifications' },
+    { name: 'Contacts', path: '/contacts' },
   ]
 
   const handleClick = (e) => {
@@ -46,38 +59,65 @@ const Navbar = (props) => {
       </div>
 
       <div className="nav-btns">
-        <ul>
-          {links.map((links) => (
-            <a>
-              <li>{links.name}</li>
-            </a>
-          ))}
-        </ul>
+        {authenticated === true && authGroup === 'Admin' ? (
+          <ul>
+            {authlinks.map((links) => (
+              <a>
+                <li>{links.name}</li>
+              </a>
+            ))}
+          </ul>
+        ) : (
+          <ul>
+            {links.map((links) => (
+              <a>
+                <li>{links.name}</li>
+              </a>
+            ))}
+          </ul>
+        )}
         {/*<button className="btns btn-pink">Sign-Up</button>*/}
-        <button className="btns btn-lightblue">Login</button>
+        {!authenticated ? (
+          <button className="btns btn-lightblue">Login</button>
+        ) : (
+          ''
+        )}
       </div>
-      <div className="cart-section">
-        <Popover placement="bottomRight" content={content}>
-          <Link href="/cart">
-            <Badge
-              className="cart-badge"
-              style={{
-                marginTop: '.9rem',
-                marginRight: '1rem',
-                backgroundColor: '#05dfd7',
-                color: 'black',
-              }}
-              count={items === undefined ? 0 : items.length}
-            >
-              <img
-                className="cart"
-                src="/cart.svg"
-                onClick={() => console.log('cart being clicked')}
-              />
-            </Badge>
-          </Link>
-        </Popover>
-      </div>
+
+      {!authenticated || authGroup !== 'Admin' ? (
+        <div className="cart-section">
+          <Popover placement="bottomRight" content={content}>
+            <Link href="/cart">
+              <Badge
+                className="cart-badge"
+                style={{
+                  marginTop: '.9rem',
+                  marginRight: '1rem',
+                  backgroundColor: '#05dfd7',
+                  color: 'black',
+                }}
+                count={items === undefined ? 0 : items.length}
+              >
+                <img
+                  className="cart"
+                  src="/cart.svg"
+                  onClick={() => console.log('cart being clicked')}
+                />
+              </Badge>
+            </Link>
+          </Popover>
+        </div>
+      ) : (
+        ''
+      )}
+
+      {authenticated === true ? (
+        <div>
+          <BsPersonFill className="nav-auth-person" />
+        </div>
+      ) : (
+        ''
+      )}
     </div>
   )
 }

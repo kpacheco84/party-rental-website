@@ -2,8 +2,14 @@ import React, { useState, useEffect, useContext } from 'react'
 import SearchBar from './SearchBar'
 import { Row, Col, Card } from 'antd'
 import { GrAddCircle, GrSubtractCircle } from 'react-icons/gr'
+import Amplify from 'aws-amplify'
+import { DataStore } from '@aws-amplify/datastore'
+import { Products as apiProducts } from '../../src/models'
+import awsmobile from '../../src/aws-exports'
 
 import { useItems, useItemsUpdate } from '../Cart'
+
+Amplify.configure(awsmobile)
 
 const { Meta } = Card
 
@@ -59,6 +65,7 @@ const data = [
 const ProductSearch = (props) => {
   const [loading, setLoading] = useState(true)
   const [newData, setNewData] = useState(data)
+  const [products, setProducts] = useState([])
   //const dispatch = useDispatchCart()
   const items = useItems()
   const { updateItems } = useItemsUpdate()
@@ -67,37 +74,16 @@ const ProductSearch = (props) => {
     console.log('im in your updateQty')
     updateItems(id, action)
   }
-  /*
-  const updateProductQty = (id, action) => {
-    let product = newData.filter((data) => data.id === id)
 
-    if (action === 'remove' && product[0].incart !== 0) {
-      let updatedAmt = product[0].incart - 1
-      console.log(product, updatedAmt)
-
-      let newDataQty = newData.map((element) =>
-        element.id === id ? { ...element, incart: updatedAmt } : element,
-      )
-
-      //dispatch({ product, type: 'remove' })
-      setNewData(newDataQty)
-    } else {
-      let updatedAmt = product[0].incart + 1
-
-      let newDataQty = newData.map((element) =>
-        element.id === id ? { ...element, incart: updatedAmt } : element,
-      )
-      console.log(product, newDataQty)
-      //dispatch({ product, type: 'add' })
-      //setName('Bob')
-
-      
-      updateItems()
-
-      setNewData(newDataQty)
-    }
+  const getData = async () => {
+    const data = await DataStore.query(apiProducts)
+    console.log('this is the products data in product search', data)
+    setProducts(data)
   }
-  */
+
+  useEffect(() => {
+    getData()
+  }, [])
 
   return (
     <div className="productsearch">
@@ -106,12 +92,12 @@ const ProductSearch = (props) => {
       <div className="products">
         <div>
           <Row gutter={80} style={{ rowGap: '40px' }}>
-            {newData.map((data) => (
+            {products.map((data) => (
               <Col key={data.id}>
                 <Card
                   id={data.id}
                   className="product-cards"
-                  style={{ width: 325 }}
+                  style={{ width: 365 }}
                   cover={
                     <img
                       alt="example"
@@ -127,8 +113,9 @@ const ProductSearch = (props) => {
                       <b>Demensions:</b> {data.height} X {data.width} X{' '}
                       {data.length}
                     </p>
+                    <p>{data.shortDesc}</p>
                     <p>
-                      Price: <b>${data.price}</b>
+                      Price: <b>${data.amount}</b>
                     </p>
                   </div>
                   <div className="add-to-cart">

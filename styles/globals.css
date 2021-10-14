@@ -118,6 +118,11 @@ button {
   width: 70%;
 }
 
+.nav-auth-person {
+  font-size: 3rem;
+  color: #05dfd7;
+}
+
 .cart-section {
   display: flex;
   justify-content: flex-end;

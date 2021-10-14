@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-partyrentalwebsite-dev-120200-authRole",
+      "UnauthRoleArn": "arn:aws:iam::395485937929:role/amplify-partyrentalwebsite-dev-120200-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::395485937929:role/amplify-partyrentalwebsite-dev-120200-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-partyrentalwebsite-dev-120200-deployment",
+      "UnauthRoleName": "amplify-partyrentalwebsite-dev-120200-unauthRole",
+      "StackName": "amplify-partyrentalwebsite-dev-120200",
+      "StackId": "arn:aws:cloudformation:us-east-2:395485937929:stack/amplify-partyrentalwebsite-dev-120200/6ca46ba0-2075-11ec-86eb-0acdff7381ca",
+      "AmplifyAppId": "d23y2inj52uf29"
+    }
+  }
+}
