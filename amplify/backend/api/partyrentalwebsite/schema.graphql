@@ -1,3 +1,11 @@
+type Payments @model @auth(rules: [{allow: public}]) @key(name: "byOrders", fields: ["ordersID"]) {
+  id: ID!
+  transID: String
+  amount: Float
+  type: String
+  ordersID: ID
+}
+
 type EventTyp @model @auth(rules: [{allow: public}]) {
   id: ID!
   name: String
@@ -29,20 +37,22 @@ type OrderDetail @model @auth(rules: [{allow: public}]) @key(name: "byOrders", f
 
 type Orders @model @auth(rules: [{allow: public}]) @key(name: "byCustomers", fields: ["customersID"]) @key(name: "byEventTyp", fields: ["eventtypID"]) {
   id: ID!
+  orderNumber: String
   orderDate: AWSDate
-  fromDate: String
   thruDate: String
-  eventName: String
+  fromDate: String
   address_line1: String
   address_line2: String
-  city: String
+  eventName: String
   state: String
   zip: Int
-  secondaryContact: String
+  city: String
   customerNotes: String
-  customersID: ID
+  secondaryContact: String
   eventtypID: ID
   OrderDetails: [OrderDetail] @connection(keyName: "byOrders", fields: ["id"])
+  Payments: [Payments] @connection(keyName: "byOrders", fields: ["id"])
+  customersID: ID
 }
 
 type Products @model @auth(rules: [{allow: public}]) {

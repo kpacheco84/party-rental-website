@@ -1,5 +1,78 @@
 export const schema = {
     "models": {
+        "Payments": {
+            "name": "Payments",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "transID": {
+                    "name": "transID",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "amount": {
+                    "name": "amount",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "type": {
+                    "name": "type",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "ordersID": {
+                    "name": "ordersID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                }
+            },
+            "syncable": true,
+            "pluralName": "Payments",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byOrders",
+                        "fields": [
+                            "ordersID"
+                        ]
+                    }
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
         "EventTyp": {
             "name": "EventTyp",
             "fields": {
@@ -67,17 +140,17 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "orderNumber": {
+                    "name": "orderNumber",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "orderDate": {
                     "name": "orderDate",
                     "isArray": false,
                     "type": "AWSDate",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "fromDate": {
-                    "name": "fromDate",
-                    "isArray": false,
-                    "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -88,8 +161,8 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "eventName": {
-                    "name": "eventName",
+                "fromDate": {
+                    "name": "fromDate",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -109,8 +182,8 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "city": {
-                    "name": "city",
+                "eventName": {
+                    "name": "eventName",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -130,8 +203,8 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "secondaryContact": {
-                    "name": "secondaryContact",
+                "city": {
+                    "name": "city",
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
@@ -144,10 +217,10 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "customersID": {
-                    "name": "customersID",
+                "secondaryContact": {
+                    "name": "secondaryContact",
                     "isArray": false,
-                    "type": "ID",
+                    "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -171,6 +244,27 @@ export const schema = {
                         "connectionType": "HAS_MANY",
                         "associatedWith": "ordersID"
                     }
+                },
+                "Payments": {
+                    "name": "Payments",
+                    "isArray": true,
+                    "type": {
+                        "model": "Payments"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "ordersID"
+                    }
+                },
+                "customersID": {
+                    "name": "customersID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
                 }
             },
             "syncable": true,
@@ -732,5 +826,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "fe8c0d62ec1bdac46145ae74cc7cf00c"
+    "version": "4dddcbbd2e3915de630f9dba9437e2c2"
 };

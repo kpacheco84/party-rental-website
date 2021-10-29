@@ -17,20 +17,8 @@ export default async (req, res) => {
     // return acutal confirmation number or trans number then add it
     //to your orders table then do your api to the order detail table
 
-    // call payment api
-
-    //call order api
-
-    //order detail api
-
     return res.status(200).json({
       confirm: 'abc123',
     })
   } catch (error) {}
 }
-
-//order api
-
-//call detail order detail api
-
-//order detail api

@@ -13,8 +13,9 @@ import {
   Modal,
   Row,
   Col,
+  Upload,
 } from 'antd'
-
+import { UploadOutlined, InboxOutlined } from '@ant-design/icons'
 import Amplify, { API } from 'aws-amplify'
 import { DataStore } from '@aws-amplify/datastore'
 import { Products as apiProducts } from '../../src/models'
@@ -128,6 +129,21 @@ const ProductForm = (props) => {
     })
   }, [props.selectedProduct])
 
+  //fileupload
+  const normFile = (e) => {
+    console.log('Upload event:', e)
+
+    if (Array.isArray(e)) {
+      return e
+    }
+
+    return e && e.fileList
+  }
+
+  const uploadImg = () => {
+    console.log('uploaded a file')
+  }
+
   return (
     <div>
       <Modal
@@ -143,6 +159,18 @@ const ProductForm = (props) => {
           <Form.Item label="Active" valuePropName="checked">
             <Switch defaultChecked />
           </Form.Item>
+
+          <Form.Item
+            name="upload"
+            label="Upload"
+            valuePropName="fileList"
+            getValueFromEvent={normFile}
+          >
+            <Upload name="logo" action={() => uploadImg()} listType="picture">
+              <Button icon={<UploadOutlined />}>Click to upload</Button>
+            </Upload>
+          </Form.Item>
+
           <Form.Item label="Size" name="size">
             <Radio.Group>
               <Radio.Button value="small">Small</Radio.Button>

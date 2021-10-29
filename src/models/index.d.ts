@@ -4,6 +4,16 @@ import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplif
 
 
 
+export declare class Payments {
+  readonly id: string;
+  readonly transID?: string;
+  readonly amount?: number;
+  readonly type?: string;
+  readonly ordersID?: string;
+  constructor(init: ModelInit<Payments>);
+  static copyOf(source: Payments, mutator: (draft: MutableModel<Payments>) => MutableModel<Payments> | void): Payments;
+}
+
 export declare class EventTyp {
   readonly id: string;
   readonly name?: string;
@@ -14,20 +24,22 @@ export declare class EventTyp {
 
 export declare class Orders {
   readonly id: string;
+  readonly orderNumber?: string;
   readonly orderDate?: string;
-  readonly fromDate?: string;
   readonly thruDate?: string;
-  readonly eventName?: string;
+  readonly fromDate?: string;
   readonly address_line1?: string;
   readonly address_line2?: string;
-  readonly city?: string;
+  readonly eventName?: string;
   readonly state?: string;
   readonly zip?: number;
-  readonly secondaryContact?: string;
+  readonly city?: string;
   readonly customerNotes?: string;
-  readonly customersID?: string;
+  readonly secondaryContact?: string;
   readonly eventtypID?: string;
   readonly OrderDetails?: (OrderDetail | null)[];
+  readonly Payments?: (Payments | null)[];
+  readonly customersID?: string;
   constructor(init: ModelInit<Orders>);
   static copyOf(source: Orders, mutator: (draft: MutableModel<Orders>) => MutableModel<Orders> | void): Orders;
 }
