@@ -20,6 +20,9 @@ import Amplify, { API } from 'aws-amplify'
 import { DataStore } from '@aws-amplify/datastore'
 import { Products as apiProducts } from '../../src/models'
 import awsmobile from '../../src/aws-exports'
+import Column from 'rc-table/lib/sugar/Column'
+import ProductImages from './ProductImages'
+
 Amplify.configure(awsmobile)
 
 const ProductForm = (props) => {
@@ -129,47 +132,24 @@ const ProductForm = (props) => {
     })
   }, [props.selectedProduct])
 
-  //fileupload
-  const normFile = (e) => {
-    console.log('Upload event:', e)
-
-    if (Array.isArray(e)) {
-      return e
-    }
-
-    return e && e.fileList
-  }
-
-  const uploadImg = () => {
-    console.log('uploaded a file')
-  }
-
   return (
     <div>
       <Modal
         forceRender
         visible={props.showProductForm}
-        width={800}
+        width={900}
         title={'Product - ' + props.action}
         closable
         onCancel={() => props.setShowProductForm(false)}
         getContainer={false}
+        footer={null}
       >
         <Form layout="horizontal" onFinish={onFinish} form={form}>
           <Form.Item label="Active" valuePropName="checked">
             <Switch defaultChecked />
           </Form.Item>
 
-          <Form.Item
-            name="upload"
-            label="Upload"
-            valuePropName="fileList"
-            getValueFromEvent={normFile}
-          >
-            <Upload name="logo" action={() => uploadImg()} listType="picture">
-              <Button icon={<UploadOutlined />}>Click to upload</Button>
-            </Upload>
-          </Form.Item>
+          <ProductImages />
 
           <Form.Item label="Size" name="size">
             <Radio.Group>
@@ -207,8 +187,11 @@ const ProductForm = (props) => {
               <InputNumber />
             </Form.Item>
           </Row>
-          <div>
-            <Form.Item label="Button">
+          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <Form.Item>
+              <Button onClick={() => props.setShowProductForm(false)}>
+                Cancel
+              </Button>
               <Button htmlType="submit">
                 {props.action === 'Edit' ? 'Update' : 'Add'}
               </Button>

@@ -562,3 +562,48 @@ button {
   margin-top: 8rem;
   margin-bottom: 3rem;
 }
+
+/* product images*/
+
+.errorMsg {
+  color: red;
+  font-size: 24px;
+  margin: 3px 0;
+}
+
+.imgPreview input[type='file'] {
+  display: none;
+}
+
+.imagesSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.imgPreview {
+  width: 250px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: white;
+}
+
+.imgPreview .customFileUpload {
+  color: pink;
+  font-size: 22px;
+  font-weight: 500;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.imgPreview button {
+  border: none;
+  outline: none;
+  width: 200px;
+  margin: 14px 10px;
+  background-color: fuchsia;
+  color: white;
+}
